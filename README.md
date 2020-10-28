@@ -87,7 +87,10 @@
                 System.setProperty("HADOOP_USER_NAME", "jxufe");
                 Configuration conf = new Configuration();
                 conf.set("fs.defaultFS","hdfs://hadoop01:9000");
+            配置文件拷贝放在：src/main/resources下自动生效
             (2)得到FileSystem对象：FileSystem.get(conf);
+        重难点：1.FileSystem.get(Configuration conf)返回的对象是本地文件系统还是分布式文件系统？==>取决于Configuration对象的配置
+               2.FileSystem.getLocal(Configuration conf)  如果conf中配置了fs.defaultFS为hdfs，此时该方法返回的还是LocalFileSystem
        2、读写文件
             (1)文件路径：Path----new Path("文件路径");
             (2)通过FileSystem得到文件输入输出流：FSDataOutputStream/FSDataInputStream

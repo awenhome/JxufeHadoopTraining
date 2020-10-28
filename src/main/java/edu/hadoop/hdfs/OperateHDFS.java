@@ -84,7 +84,7 @@ public class OperateHDFS {
            OperateHDFS operateHDFS = new OperateHDFS();
            operateHDFS.writeToHDFS();
 //           operateHDFS.readHDFSFile();
-           operateHDFS.putFile();
+//           operateHDFS.putFile();
        }catch(Exception e){
            e.printStackTrace();
        }
