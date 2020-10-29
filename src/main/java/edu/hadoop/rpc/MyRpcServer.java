@@ -17,7 +17,7 @@ public class MyRpcServer implements MyRpcIface{
                 .Builder(new Configuration())
                 .setProtocol(MyRpcIface.class)
                 .setInstance(new MyRpcServer())
-                .setBindAddress("localhost")
+                .setBindAddress("10.255.171.238")
                 .setPort(8077)
                 .build();
         server.start();

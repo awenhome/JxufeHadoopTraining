@@ -21,18 +21,27 @@ public class HDFSDataInputExample5 {
      *   从本地拷贝到服务器：
      *      Linux下测试：create /home/jxufe/hadooplocaldata/hello.txt /hello.txt
      *      Window下测试:create E:/sftp/hadooplocaldata/hello.txt /hello.txt
+     *       绝对路劲文件:create ./localdata/txt/inputtemperature.txt /inputtemperature.txt
+     *       相对路劲文件：
      *   从服务器写到本地：
      *      Linux下测试：get /home/jxufe/hello_download.txt /hello.txt  true
      *      Window下测试：get E:/sftp/hadooplocaldata/hello_download.txt /hello.txt true
+     *      get  /inputtemperature.txt ./outputdata/txt/inputtemperature.txt
      * @param args
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
 
     	HDFSDataInputExample5 sample = new HDFSDataInputExample5();
-        String cmd = args[0];
-        String localPath = args[1];
-        String hdfsPath = args[2];
+    	//参数设置默认值
+        String cmd = "create";
+        String localPath = "./localdata/txt/inputtemperature.txt";
+        String hdfsPath = "/inputtemperature.txt";
+    	if(args.length >=3) {
+    	    cmd = args[0];
+    	    localPath = args[1];
+    	    hdfsPath = args[2];
+        }
         if (cmd.equals("create")) {
             sample.createFile(localPath, hdfsPath);
         } else if (cmd.equals("get")) {
@@ -52,7 +61,7 @@ public class HDFSDataInputExample5 {
         try {
             System.setProperty("HADOOP_USER_NAME", "jxufe");
             Configuration conf = new Configuration();
-            conf.set("fs.defaultFS","hdfs://hadoop01:9000");
+//            conf.set("fs.defaultFS","hdfs://hadoop01:9000");
             //如果Hadoop用户标识不同于客户机上的用户账号，可以通过hadoop.job.ugi属性来显式设定Hadoop用户名和组名
 //            conf.set("hadoop.job.ugi", "jxufe,jxufe");
             FileSystem fileSystem = FileSystem.get(URI.create(hdfsPath), conf);
@@ -69,6 +78,7 @@ public class HDFSDataInputExample5 {
             logger.info("create file in hdfs:" + hdfsPath);
         } finally {
             IOUtils.closeStream(in);
+            System.out.println("上传文件到HDFS成功,HDFS保存位置为："+hdfsPath);
         }
     }
     /**
@@ -81,7 +91,7 @@ public class HDFSDataInputExample5 {
     public void getFile(String localPath, String hdfsPath, boolean print) throws IOException {
         System.setProperty("HADOOP_USER_NAME", "jxufe");
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS","hdfs://hadoop01:9000");
+//        conf.set("fs.defaultFS","hdfs://hadoop01:9000");   //有配置文件时可以不用设置
         //如果Hadoop用户标识不同于客户机上的用户账号，可以通过hadoop.job.ugi属性来显式设定Hadoop用户名和组名
         conf.set("hadoop.job.ugi", "jxufe,jxufe");
         FileSystem fileSystem = FileSystem.get(URI.create(hdfsPath), conf);
@@ -100,6 +110,7 @@ public class HDFSDataInputExample5 {
             }
         } finally {
             IOUtils.closeStream(out);
+            System.out.println("从HDFS下载文件成功,本地保存位置为："+localPath);
         }
     }
 }

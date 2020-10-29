@@ -14,7 +14,7 @@ public class FileSystemReader2 {
 		// 会默认读取core-site.xml中的fs.default.name来判断文件系统。如果未设置则默认是本地文件系统
 		Configuration configuration = new Configuration();
 		String uri = /* args[0] */"hdfs://hadoop01:9000/b.txt";
-//		String uri="intputtemperature.txt";  //自动补全hdfs://hadoop01:9000/user/jxufe/路劲
+//		String uri="inputtemperature.txt";  //自动补全hdfs://hadoop01:9000/user/jxufe/路劲
 //		String uri="/home/hadoop/workspace/HdfsTest/inputtemperature.txt";//需要注释调fs.default.name配置，则默认为读取本地文件
 		FileSystem fileSystem = FileSystem.get(URI.create(uri), configuration);
 		//instanceof二元运算符：左边是对象，右边是类；当对象是右边类或子类所创建对象时，返回true；否则，返回false。

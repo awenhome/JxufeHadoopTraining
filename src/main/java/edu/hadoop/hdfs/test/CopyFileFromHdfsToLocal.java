@@ -28,8 +28,8 @@ public static void main(String[] args) {
 	FileSystem fs;
 	FSDataInputStream in;
 	OutputStream out;
-	String localFile="/home/hadoop/inputdata/file01.txt";
-	String hdfsFile = "hdfs_api_out/file01.txt";
+	String localFile="./outputdata/txt/wordcount/file01.txt";
+	String hdfsFile = "/testdata/file01.txt";
 	try{
 		conf = new Configuration();
 		fs = FileSystem.get(conf);
@@ -41,7 +41,7 @@ public static void main(String[] args) {
 //		FileInputStream fis = new FileInputStream(localFile);
 //		in = new BufferedInputStream(fis);
 		
-		IOUtils.copyBytes(in, out, 4096, true);//false表示不關閉輸入輸出流
+		IOUtils.copyBytes(in, out, 4096, false);//false表示不關閉輸入輸出流
 		in.seek(0);//輸入流指針回到文件開始位置
 		IOUtils.copyBytes(in, System.out, 4096, true);//把輸入文件內容寫道控制臺輸出
 	}catch(Exception e){

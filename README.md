@@ -2,6 +2,9 @@
 
 ## Hadoop training for Students
   Examples for Hadoop Training 
+  
+## 老师项目上传的Github地址
+  https://github.com/awenhome/JxufeHadoopTraining
 
 ## IDEA快捷键
   参考网址：https://blog.csdn.net/qq_38963960/article/details/89552704
@@ -75,10 +78,15 @@
  
    ### 使用Hadoop RPC通信机制步骤
    ```
-    1.定义RPC服务接口：RPC定义了服务器端对外提供的服务接口；
+    1.定义RPC服务接口类（public interface 接口类）：RPC定义了服务器端对外提供的服务接口；
+        注意必须要有字段：long versionID
     2.实现RPC服务接口：Hadoop的RPC服务接口通常是Java接口，用户需要实现该接口；
+        2.1.服务类实现（implements）1中定义的接口类；
     3.构造和启动RPC Server：使用Builder类构造RPC Server，并调用start()方法启动RPC Server;
+        3.1. new RPC().Builder(conf)......build();得到服务类对象
+        3.2 服务类对象启动： RPC.Server.start()
     4.RPC Client发送请求给RPC Server：RPC Client调用线程发起RPC连接请求，等待RPC Server响应后，向其传输数据。
+        4.1 通过RPC.getProxy得到接口实例，调用接口中定义好的方法，实现远程RPC与服务器交互。
    ```
    ### Hadoop HDFS的编程套路
    ```
