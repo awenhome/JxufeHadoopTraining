@@ -112,6 +112,7 @@
    ### hadoop jar命令提交任务
    ```
     1.生成jar包
+        打开maven界面，点击package后在项目的target下面会生成本项目Jar文件，名称如：JxufeHadoopTraining-1.0-SNAPSHOT.jar
     2.命令提交格式：
         hadoop jar jar文件（绝对或相对路劲） 类（含有包路劲） program_args（main参数）
         hadoop jar JxufeHadoopTraining-1.0-SNAPSHOT.jar edu.hadoop.hdfs.simpledemo.HdfsIODemo5 create ./hello.txt /hello.txt
