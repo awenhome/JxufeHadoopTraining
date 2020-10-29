@@ -8,13 +8,13 @@ import java.io.IOException;
 public class MyRpcServer implements MyRpcIface{
     @Override
     public String doSomething(String str) {
+        //TODO control
         System.out.println("MyRpcServer doSomething");
-        return "服务器已收到信息："+str;
+        return "服务器已收到信息："+str;   //返回给调用的Client
     }
 
     public static void main(String[] args) throws IOException {
-        RPC.Server server = new RPC
-                .Builder(new Configuration())
+        RPC.Server server = new RPC.Builder(new Configuration())
                 .setProtocol(MyRpcIface.class)
                 .setInstance(new MyRpcServer())
                 .setBindAddress("10.255.171.238")
