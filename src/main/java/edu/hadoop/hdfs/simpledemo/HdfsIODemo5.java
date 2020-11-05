@@ -34,18 +34,18 @@ public class HdfsIODemo5 {
 
     	HdfsIODemo5 sample = new HdfsIODemo5();
     	//参数设置默认值
-        String cmd = "create";
-        String localPath = "./localdata/txt/inputtemperature.txt";
-        String hdfsPath = "/inputtemperature.txt";
+        String operateType = "create";
+        String localPath = "./localdata/txt/hello.txt";
+        String hdfsPath = "/hello1029test.txt";   //hdfs://hadoop01:9000/hello.txt
         boolean print = true;
         if(args.length >=3) {
-    	    cmd = args[0];
+    	    operateType = args[0];
     	    localPath = args[1];
     	    hdfsPath = args[2];
         }
-        if (cmd.equals("create")) {
+        if (operateType.equals("create")) {
             sample.createFile(localPath, hdfsPath);
-        } else if (cmd.equals("get")) {
+        } else if (operateType.equals("get")) {
             if(args.length >=4) {
                 print = Boolean.parseBoolean(args[3]);
             }

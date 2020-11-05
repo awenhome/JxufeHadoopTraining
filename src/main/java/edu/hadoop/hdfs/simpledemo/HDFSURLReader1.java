@@ -15,7 +15,7 @@ public class HDFSURLReader1 {
 		InputStream inputStream = null;
 		try {
 //			inputStream = new URL(args[0]).openStream();
-			inputStream = new URL("hdfs://hadoop01:9000/b.txt").openStream();
+			inputStream = new URL("hdfs://hadoop01:9000/hello.txt").openStream();
 			IOUtils.copyBytes(inputStream, System.out, 1024, true);
 		    System.out.println("执行完成！");
 		} catch (Exception e) {

@@ -112,9 +112,11 @@
    ### hadoop jar命令提交任务
    ```
     1.生成jar包
-        打开maven界面，点击package后在项目的target下面会生成本项目Jar文件，名称如：JxufeHadoopTraining-1.0-SNAPSHOT.jar
+        1.1 打开maven界面，点击package后在项目的target下面会生成本项目Jar文件，名称如：JxufeHadoopTraining-1.0-SNAPSHOT.jar
+        1.2 jar文件上传到linux机器中
     2.命令提交格式：
-        hadoop jar jar文件（绝对或相对路劲） 类（含有包路劲） program_args（main参数）
-        hadoop jar JxufeHadoopTraining-1.0-SNAPSHOT.jar edu.hadoop.hdfs.simpledemo.HdfsIODemo5 create ./hello.txt /hello.txt
+        hadoop jar jar文件（绝对或相对路劲） 类名（含有包路劲的完整类名称） program_args（main参数）
+        上传：hadoop jar JxufeHadoopTraining-1.0-SNAPSHOT.jar edu.hadoop.hdfs.simpledemo.HdfsIODemo5 create ./hello.txt /hello.txt
+        下载：hadoop jar JxufeHadoopTraining-1.0-SNAPSHOT.jar edu.hadoop.hdfs.simpledemo.HdfsIODemo5 get  /hello.txt ./hello_download.txt ture
            注意：./hello.txt这个是一个本地文件路劲，是相对jar文件的相对路劲。这里可以写绝对路劲、如果是window下测试，需要用window下路劲
    ```

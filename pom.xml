@@ -34,12 +34,12 @@
       <artifactId>hadoop-client</artifactId>
       <version>${hadoop.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-hdfs</artifactId>
       <version>${hadoop.version}</version>
     </dependency>
-
     <!-- 单元测试的依赖 -->
     <dependency>
       <groupId>junit</groupId>
