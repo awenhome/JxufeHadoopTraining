@@ -42,7 +42,7 @@ public class HDFSApiTest {
 //            IOUtils.copyBytes(in_hdfs,System.out,4096,false);
             //测试：文件传输IO
             //2.1 上传：本地传hdfs
-//            IOUtils.copyBytes(in_local,out_hdfs,4096,false);
+            IOUtils.copyBytes(in_local,out_hdfs,4096,false);
 //            //2.2 下载：HDFS传本地
 //            IOUtils.copyBytes(in_hdfs,out_local,4096,false);
 //            //2.3 本地传本地
