@@ -57,6 +57,7 @@ public class OperateHDFS {
             //输出读取的文件内容到控制台
             System.out.print(new String(buf,0,len));
         }
+
         //关闭输出流
         fis.close();
         fs.close();

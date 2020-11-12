@@ -19,9 +19,9 @@ public class HdfsIODemo5 {
     /**
      * @命令行参数示例：
      *   从本地拷贝到服务器：
-     *      Linux下测试：create /home/jxufe/hadooplocaldata/hello.txt /hello.txt
-     *      Window下测试:create E:/sftp/hadooplocaldata/hello.txt /hello.txt
-     *       绝对路劲文件:create ./localdata/txt/inputtemperature.txt /inputtemperature.txt
+     *      Linux下测试：put /home/jxufe/hadooplocaldata/hello.txt /hello.txt
+     *      Window下测试:put E:/sftp/hadooplocaldata/hello.txt /hello.txt
+     *       绝对路劲文件:put ./localdata/txt/inputtemperature.txt /inputtemperature.txt
      *       相对路劲文件：
      *   从服务器写到本地：
      *      Linux下测试：get /hello.txt /home/jxufe/hello_download.txt   true
@@ -34,7 +34,7 @@ public class HdfsIODemo5 {
 
     	HdfsIODemo5 sample = new HdfsIODemo5();
     	//参数设置默认值
-        String operateType = "create";
+        String operateType = "put";
         String localPath = "./localdata/txt/hello.txt";
         String hdfsPath = "/hello1029test.txt";   //hdfs://hadoop01:9000/hello.txt
         boolean print = true;
@@ -43,7 +43,7 @@ public class HdfsIODemo5 {
     	    localPath = args[1];
     	    hdfsPath = args[2];
         }
-        if (operateType.equals("create")) {
+        if (operateType.equals("put")) {
             sample.createFile(localPath, hdfsPath);
         } else if (operateType.equals("get")) {
             if(args.length >=4) {
@@ -78,7 +78,7 @@ public class HdfsIODemo5 {
             IOUtils.copyBytes(in, out, 4096, false);
             out.hsync();
             out.close();
-            logger.info("create file in hdfs:" + hdfsPath);
+            logger.info("put file in hdfs:" + hdfsPath);
         } finally {
             IOUtils.closeStream(in);
             System.out.println("上传文件到HDFS成功,HDFS保存位置为："+hdfsPath);

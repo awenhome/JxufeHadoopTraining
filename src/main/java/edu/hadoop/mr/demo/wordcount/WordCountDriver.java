@@ -53,22 +53,22 @@ public class WordCountDriver {
 		//设置输出的key/value类型
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
-		job.setNumReduceTasks(2);
+		job.setNumReduceTasks(1);
 
 		job.setInputFormatClass(TextInputFormat.class);
 //		//Combiner小文件：大家可以传两个小文件测试下使用Combiner小文件和不使用时的执行效果
 //		job.setInputFormatClass(CombineTextInputFormat.class);
 //		CombineTextInputFormat.setMaxInputSplitSize(job, 2*1024);
 
-		Path inputPath = new Path("/wordcount_in/wordcount.txt") ;
+		Path inputPath = new Path("/wordcount_in/") ;
 		Path outputDirPath = new Path("/wordcountresult");
 		if(args.length>=2){
 			inputPath = new Path(args[0]);
 			outputDirPath = new Path(args[1]);
 		}
 		CombineTextInputFormat.addInputPath(job, inputPath);
-		
-		
+
+
 		
 		//设置输入文件/输出文件
 //		TextInputFormat.addInputPath(job, new Path(args[0]));
