@@ -104,12 +104,13 @@ public class WordCountTest001 {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         //1.Java Client:submit Job
         Configuration configuration = new Configuration();
+//        configuration.set("fs.defaultFS","hdfs://hadoop01:9000");
         Job job = Job.getInstance(configuration);
         //2.设置驱动类
         job.setJarByClass(WordCountTest001.class);
         //3.Mapper端设置
-        TextInputFormat.addInputPath(job,new Path("/wc_in/wordcount.txt"));
-        TextInputFormat.addInputPath(job,new Path("/wordcount_in/"));
+        TextInputFormat.addInputPath(job,new Path("/wc_in"));
+//        TextInputFormat.addInputPath(job,new Path("/wordcount_in/"));
         job.setMapperClass(WordCountMapper.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);

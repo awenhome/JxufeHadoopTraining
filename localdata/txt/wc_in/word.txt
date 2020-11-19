@@ -1,0 +1,7 @@
+Hadoop is good
+Spark is fast
+Spark is better
+scala is a good language
+spark can use scala , java and phthon
+hello scala
+hello spark

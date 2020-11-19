@@ -143,7 +143,7 @@ public class WordCountDemo {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        String inputPathStr = "/wordcount_in",outputPathStr = "/output/day1112_03";
+        String inputPathStr = "/wc_in",outputPathStr = "/output/day1112_04";
         if(args.length>=2){
             inputPathStr = args[0];
             outputPathStr = args[1];

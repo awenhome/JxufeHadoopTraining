@@ -140,3 +140,9 @@
            和Reduce是一样的，合并，相同的key对应的value值相加，这样传送效率高，不用一下子传好多相同的key，在数据量非常大的时候，这样的优化可以节省很多网络宽带和
            本地磁盘IO流的读写。
    ```
+
+   ### Hadoop错误参考
+   ```
+    解决Exception: org.apache.hadoop.io.nativeio.NativeIO$Windows.access0(Ljava/lang/String;I)Z 等一系列问题
+    https://blog.csdn.net/congcong68/article/details/42043093
+   ```
