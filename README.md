@@ -120,3 +120,23 @@
         下载：hadoop jar JxufeHadoopTraining-1.0-SNAPSHOT.jar edu.hadoop.hdfs.simpledemo.HdfsIODemo5 get  /hello.txt ./hello_download.txt ture
            注意：./hello.txt这个是一个本地文件路劲，是相对jar文件的相对路劲。这里可以写绝对路劲、如果是window下测试，需要用window下路劲
    ```
+   ### MapReduce执行流程简介
+   ```
+    执行顺序大致如下：
+        1.Map Task读文件{TextInputFormat(-->RecordReader-->read())}一次读取一行，返回（Key，Value）
+        2.Map执行：将上一步获取的(key，value)键值对经过Mapper的map方法逻辑处理成新的(k,v)键值对，通过context.write输出到OutputCollector收集器
+    Shuffle开始:
+        3.OutputCollector把收集到的（k,v）键值对写入到环形缓冲区中，环形缓冲区默认大小为100M，只写80%（阈值）。缓冲区达到80%开始溢写文件，触发spill溢写操作；
+           3.1.分区Partitioner；
+           3.2.排序Sort(先按分区排，再按key排序)；
+           3.3.Combiner在Map端进行局部Value合并
+        PS：理解顺序为什么是Partitioner-->Sort-->Combiner
+        4.Spill溢出多个文件合并Merge（采用归并排序进行合并，合并后还是有序）
+        5.到Reduce端再进行Merge（采用归并排序进行合并，合并后还是有序），合并成大文件
+    Shuffle结束
+        6.Reduce执行
+        7.最后通过OutputFormat方法将结果数据写出到输出文件夹中
+        注：环形缓冲区的大小可以通过在mapred-site.xml中设置mapreduce.task.io.sort.mb的值来改变，默认是100M。Map端溢出的时候会先调用Combiner组件，逻辑
+           和Reduce是一样的，合并，相同的key对应的value值相加，这样传送效率高，不用一下子传好多相同的key，在数据量非常大的时候，这样的优化可以节省很多网络宽带和
+           本地磁盘IO流的读写。
+   ```

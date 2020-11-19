@@ -1,0 +1,12 @@
+1,Tom,25,F,85
+2,Tim,22,M,89
+3,Adam,20,F,98
+4,Brown,29,M,90
+5,Alexander,35,M,91
+6,Bill,33,F,86
+7,George,18,M,80
+8,Hank,17,M,97
+9,Kevin,26,M,98
+10,Jack,25,M,95
+11,Mars,22,M,92
+12,Glen,30,F,93

@@ -45,7 +45,7 @@ public class WordCountDriver {
 		job.setJarByClass(WordCountDriver.class);
 		//设置map
 		job.setMapperClass(WordCountMapper.class);
-//		job.setPartitionerClass(MyPartitioner.class);
+		job.setPartitionerClass(MyPartitioner.class);
 		//设置reducer
 		job.setReducerClass(WordCountReduce.class);
 		job.setCombinerClass(WordCountCombiner.class);
@@ -53,15 +53,15 @@ public class WordCountDriver {
 		//设置输出的key/value类型
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
-		job.setNumReduceTasks(1);
+		job.setNumReduceTasks(4);
 
 		job.setInputFormatClass(TextInputFormat.class);
 //		//Combiner小文件：大家可以传两个小文件测试下使用Combiner小文件和不使用时的执行效果
 //		job.setInputFormatClass(CombineTextInputFormat.class);
 //		CombineTextInputFormat.setMaxInputSplitSize(job, 2*1024);
 
-		Path inputPath = new Path("/wordcount_in/") ;
-		Path outputDirPath = new Path("/wordcountresult");
+		Path inputPath = new Path("/wc_in") ;
+		Path outputDirPath = new Path("/output/wc001");
 		if(args.length>=2){
 			inputPath = new Path(args[0]);
 			outputDirPath = new Path(args[1]);

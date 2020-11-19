@@ -1,0 +1,5 @@
+hello world
+hello scala
+hello idea
+maven is good
+java is good
