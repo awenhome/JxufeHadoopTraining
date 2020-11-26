@@ -8,6 +8,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -58,11 +59,15 @@ public class WordCountTest001 {
             lineNumber++;
             //TODO (K1, V1) → list(K2, V2)
             //K1=0,V1="hello world world"
+            System.out.print("map in value:"+value.toString()+"===>");
             String[] words = value.toString().split("\\s+");
+            System.out.print("map out:");
             for(int i=0;i<words.length;i++){
                 String word = words[i];
                 context.write(new Text(word),new IntWritable(1));
+                System.out.print("("+word+",1)\t");
             }
+            System.out.println();
         }
 
 
@@ -78,6 +83,54 @@ public class WordCountTest001 {
         @Override
         public void run(Context context) throws IOException, InterruptedException {
             super.run(context);
+        }
+    }
+
+    /**
+     * @分区规则:按照单次得收个字母来分区
+     *      分区0：首字母不在[a-z]以内的;
+     *      分区1：首字母在[a,h]中;
+     *      分区2：首字母在(h,z]中;
+     */
+    public static class WordCountPartitioner extends Partitioner<Text,IntWritable>{
+        @Override
+        public int getPartition(Text text, IntWritable intWritable, int numPartitions) {
+            try {
+                System.out.println("执行了getPartition方法");
+                String word = text.toString();
+                char firstAlphabet = word.charAt(0);
+                if(firstAlphabet>='a'&&firstAlphabet<='h'){
+                    return 1%numPartitions;
+                }else if(firstAlphabet>'h'&&firstAlphabet<='z'){
+                    return 2%numPartitions;
+                }else{
+                    return 0%numPartitions;
+                }
+            }catch (Exception e){
+//                e.printStackTrace();
+                return 0%numPartitions;
+            }
+        }
+    }
+    /**
+     * @说明  相当于在Map端发送之前先将key对应的value数值合并
+     * @执行时间 在Map端Spill到文件时执行
+     */
+    public static class WordCountCombiner extends Reducer<Text,IntWritable,Text,IntWritable>{
+        //CTRL+O
+
+        @Override
+        protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+            //TODO 将单词key出现次数的列表values中的值进行累加，得到出现的总次数
+            int countAll = 0;
+            System.out.print("Combiner Key="+key.toString()+";values:<");
+            for(IntWritable countOne:values){
+                countAll+=countOne.get();
+                System.out.print(countOne.get()+" ");
+            }
+            System.out.println(">");
+            context.write(key,new IntWritable(countAll));
+            System.out.println("Combiner out:("+key.toString()+","+countAll+")");
         }
     }
 
@@ -99,9 +152,12 @@ public class WordCountTest001 {
         protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
             //TODO 将单词key出现次数的列表values中的值进行累加，得到出现的总次数
             int countAll = 0;
+            System.out.print("Key="+key.toString()+";values:<");
             for(IntWritable countOne:values){
                 countAll+=countOne.get();
+                System.out.print(countOne.get()+" ");
             }
+            System.out.println(">");
             context.write(key,new IntWritable(countAll));
             System.out.println("Reduce out:("+key.toString()+","+countAll+")");
         }
@@ -116,6 +172,7 @@ public class WordCountTest001 {
         job.setJarByClass(WordCountTest001.class);
         //3.Mapper端设置
         TextInputFormat.addInputPath(job,new Path("/wc_in"));
+//        TextInputFormat.addInputPath(job,new Path("/stopword.txt"));
 //        TextInputFormat.addInputPath(job,new Path("/wordcount_in/"));
         job.setMapperClass(WordCountMapper.class);
         job.setMapOutputKeyClass(Text.class);
@@ -125,6 +182,13 @@ public class WordCountTest001 {
         job.setReducerClass(WordCountReduce.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+        job.setNumReduceTasks(3);
+
+        //5.设置分区或者合并
+        job.setPartitionerClass(WordCountPartitioner.class);
+        job.setCombinerClass(WordCountCombiner.class);
+
+
         //输出文件夹如果存在则删除
         FileSystem fileSystem = FileSystem.get(configuration);
         fileSystem.delete(new Path("/output/wc_1"),true);

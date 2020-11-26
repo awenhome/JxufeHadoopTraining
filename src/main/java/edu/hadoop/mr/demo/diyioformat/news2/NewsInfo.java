@@ -1,4 +1,4 @@
-package edu.hadoop.mr.demo.diyinput.news2;
+package edu.hadoop.mr.demo.diyioformat.news2;
 
 import org.apache.hadoop.io.WritableComparable;
 

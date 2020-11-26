@@ -1,4 +1,4 @@
-package edu.hadoop.mr.demo.diyinput.news;
+package edu.hadoop.mr.demo.diyioformat.news;
 
 import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
@@ -9,7 +9,6 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 /**
  * @author 彭文忠

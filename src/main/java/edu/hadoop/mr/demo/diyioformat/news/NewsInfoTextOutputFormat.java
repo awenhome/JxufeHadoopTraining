@@ -1,4 +1,4 @@
-package edu.hadoop.mr.demo.diyinput.news;
+package edu.hadoop.mr.demo.diyioformat.news;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

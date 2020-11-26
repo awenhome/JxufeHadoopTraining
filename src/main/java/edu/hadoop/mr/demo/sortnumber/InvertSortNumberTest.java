@@ -20,6 +20,7 @@ import java.io.IOException;
  * @author 彭文忠
  * @date 2020/11/12
  * @说明 手把手教学敲代码：整数文件排序：文件中一个数字一行
+ *       数字全局排序（降序）
  */
 public class InvertSortNumberTest {
     /**

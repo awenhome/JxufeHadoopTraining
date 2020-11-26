@@ -1,4 +1,4 @@
-package edu.hadoop.mr.demo.diyinput.maxfloat;
+package edu.hadoop.mr.demo.diyioformat.maxfloat;
 
 import java.io.DataInput;
 import java.io.DataOutput;

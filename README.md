@@ -142,6 +142,10 @@
         注：环形缓冲区的大小可以通过在mapred-site.xml中设置mapreduce.task.io.sort.mb的值来改变，默认是100M。Map端溢出的时候会先调用Combiner组件，逻辑
            和Reduce是一样的，合并，相同的key对应的value值相加，这样传送效率高，不用一下子传好多相同的key，在数据量非常大的时候，这样的优化可以节省很多网络宽带和
            本地磁盘IO流的读写。
+
+    MapReduce作业运行流程主要包含两个阶段：Map阶段、Reduce阶段。
+        （1）Map阶段：FileInputFormat => InputSplit => RecordReader => Mapper => Partition => Sort => Combiner。
+        （2）Reduce阶段：Reducer => FileOutputFormat => RecordWriter。
    ```
 
    ### Hadoop错误参考

@@ -1,4 +1,4 @@
-package edu.hadoop.mr.demo.diyinput.lawfile;
+package edu.hadoop.mr.demo.diyioformat.lawfile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
