@@ -206,7 +206,7 @@ public class WordCountTest002 {
         TextOutputFormat.setOutputPath(job,new Path(outputPath));
 
         //6.Job其它设置：Combiner||Partitioner
-        job.setCombinerClass(WordCountCombiner.class);
+//        job.setCombinerClass(WordCountCombiner.class);
         job.setPartitionerClass(WordCountPartitioner.class);
 
 

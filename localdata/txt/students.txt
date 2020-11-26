@@ -10,3 +10,15 @@
 10,Jack,25,M,95
 11,Mars,22,M,92
 12,Glen,30,F,93
+13,Angle,25,F,85
+14,Tmm,22,M,89
+15,Adom,21,F,98
+16,Drown,28,M,90
+17,Elexander,35,M,91
+18,Lill,33,F,86
+19,Meorge,18,M,80
+20,Qan,18,M,97
+21,Alvin,26,M,98
+22,Ack,25,M,95
+23,Park,22,M,92
+24,Alex,30,F,93

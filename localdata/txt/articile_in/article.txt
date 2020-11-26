@@ -1,0 +1,7 @@
+We ask that you please do not send us emails privately asking for support. We are non-paid
+ volunteers who help out with the project and we do not necessarily have the time or energy
+to help people on an individual basis. Instead, we have setup mailing lists for each module
+which often contain hundreds of individuals who will help answer detailed requests for
+help. The benefit of using mailing lists over private communication is that it is a shared
+resource where others can also learn from common mistakes and as a community we all grow
+together.

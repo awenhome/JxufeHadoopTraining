@@ -58,7 +58,7 @@ public class WordCountTest001 {
             lineNumber++;
             //TODO (K1, V1) → list(K2, V2)
             //K1=0,V1="hello world world"
-            String[] words = value.toString().split(" ");
+            String[] words = value.toString().split("\\s+");
             for(int i=0;i<words.length;i++){
                 String word = words[i];
                 context.write(new Text(word),new IntWritable(1));
@@ -73,6 +73,11 @@ public class WordCountTest001 {
         protected void cleanup(Context context) throws IOException, InterruptedException {
             super.cleanup(context);
             System.out.println("该文件一共行数是："+lineNumber);
+        }
+
+        @Override
+        public void run(Context context) throws IOException, InterruptedException {
+            super.run(context);
         }
     }
 
@@ -98,6 +103,7 @@ public class WordCountTest001 {
                 countAll+=countOne.get();
             }
             context.write(key,new IntWritable(countAll));
+            System.out.println("Reduce out:("+key.toString()+","+countAll+")");
         }
     }
 

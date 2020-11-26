@@ -6,6 +6,9 @@
 ## 老师项目上传的Github地址
   https://github.com/awenhome/JxufeHadoopTraining
 
+## 课堂视频：超星云盘（定期更新）
+  链接: http://pan-yz.chaoxing.com/share/info/6b4c499c7eb1795d
+  
 ## IDEA快捷键
   参考网址：https://blog.csdn.net/qq_38963960/article/details/89552704
    ```
