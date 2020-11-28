@@ -21,13 +21,12 @@ import java.net.URI;
 
 public class FileCopyWithProgress6 {
     public static void main(String[] args) throws Exception {
-        String localSrc = "";
-        String dst = "";
+        String localSrc = "localdata\\txt\\temperature\\cndcdata10000.txt";
+        String dst = "/inputdata/c1.txt";
         if (args.length >= 2) {
             localSrc = args[0];
             dst = args[1];
         }
-
         InputStream in = new BufferedInputStream(new FileInputStream(localSrc));
         System.setProperty("HADOOP_USER_NAME", "jxufe");
         Configuration conf = new Configuration();
@@ -38,6 +37,9 @@ public class FileCopyWithProgress6 {
                 System.out.print(".");
             }
         });
-        IOUtils.copyBytes(in, out, 4096, true);
+        IOUtils.copyBytes(in, out, 4096, false);  //自动关闭不能传入true，否则做一次就会关闭，文件内容上传会不完整
+        in.close();
+        out.close();
+        fs.close();
     }
 }
