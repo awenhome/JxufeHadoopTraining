@@ -1,2 +1,3 @@
 # Project exclude paths
 /target/
+/localdata/txt/temperature/cndcdata.txt
