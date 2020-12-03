@@ -1,0 +1,42 @@
+//创建分区表
+create table student_part(id string,age int,name string)
+partitioned by (city string)
+row format delimited fields terminated by ',' stored as textfile;
+
+
+//describe:查看表信息
+desc formatted student_part;
+
+//将本地数据导入到分区表student_part中
+LOAD DATA LOCAL INPATH './localdata/hivedata/student_buckets.txt' OVERWRITE INTO TABLE student_part PARTITION (city='jx');
+
+
+//描述:查看表的信息
+select * from student_part where city='jx';
+
+//创建分区分桶表
+create table student_bucket(id string,age int,name string)
+partitioned by (city string)
+clustered by (age)
+sorted by(name) into 4 buckets
+row format delimited fields terminated by ',' stored as textfile;
+
+//描述:查看表的信息,含有分桶个数
+desc formatted student_bucket;
+
+//分桶表里面的数据如果想被分到不同通,必须通过insert into批量插入数据才行.直接load文件的数据不会分桶,因为load文件仅仅相当于把文件拷贝到hdfs上.而分桶会在insert过程中根据分桶的column的hash值进行分到不同桶操作.
+insert into table student_bucket partition(city='jx') select id,age,name from student_part;
+
+
+//对分桶数据抽样
+//语法tablesample(bucket x out of y on column)  其中y表示桶簇的概念。例如分了4
+个桶，则每个桶簇中含有4/y个桶的数据。故x out of y共含有：x*（4/y）个桶的数据。
+select * from student_bucket tablesample(bucket 1 out of 4 on age);  //桶1数据
+select * from student_bucket tablesample(bucket 2 out of 4 on age);  //桶2数据
+select * from student_bucket tablesample(bucket 3 out of 4 on age);  //桶3数据
+select * from student_bucket tablesample(bucket 4 out of 4 on age);  //桶4数据
+select * from student_bucket tablesample(bucket 1 out of 2 on age);  //本案例中桶1和3的数据
+select * from student_bucket tablesample(bucket 1 out of 8 on age);  //本案例中第1/8和5/8个桶簇相加等于第1个桶的数据
+select * from student_bucket tablesample(bucket 5 out of 8 on age);  //本案例中第1/8和5/8个桶簇相加等于第1个桶的数据
+分8个通簇，则每个桶簇存放0.5个桶数据，此时第1和5个桶簇相加等于第1个桶的数据；
+同理第2和6个桶簇相加等于第2个桶的数据，依次类推。

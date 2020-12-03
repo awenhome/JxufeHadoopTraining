@@ -7,7 +7,7 @@
   https://github.com/awenhome/JxufeHadoopTraining
 
 ## 课堂视频：超星云盘（定期更新）
-  链接: http://pan-yz.chaoxing.com/share/info/6b4c499c7eb1795d
+  链接: http://pan-yz.chaoxing.com/share/info/cfb3ad99181c4de9
   
 ## IDEA快捷键
   参考网址：https://blog.csdn.net/qq_38963960/article/details/89552704
@@ -77,6 +77,8 @@
     链接: http://pan-yz.chaoxing.com/share/info/c3b6fe27c5f468da
  -linux下环境搭建视频：
     链接: http://pan-yz.chaoxing.com/share/info/a1251cc3e6d8eed2
+ -为防止被利用Hadoop集群进行挖掘，建议修改以下yarn的端口，参考：
+    https://blog.csdn.net/yz972641975/article/details/102835910
 ```
  
    ### 使用Hadoop RPC通信机制步骤
@@ -152,4 +154,27 @@
    ```
     解决Exception: org.apache.hadoop.io.nativeio.NativeIO$Windows.access0(Ljava/lang/String;I)Z 等一系列问题
     https://blog.csdn.net/congcong68/article/details/42043093
+   ```
+##Hive部分
+   ### MYSQL安装（作为HIVE元数据的数据库）
+   ```
+    MYSQL相关软件下载：http://pan.jxufe.cn:80/link/5F9950DF4ECEFD5D5E2A692236C8F919 有效期限：2025-04-01
+    MYSQL安装（Windows、Linux)+Navicat安装视频：
+        链接: http://pan-yz.chaoxing.com/share/info/cc122dca21cef516
+    Linux安装文字版本，参考：operator\mysql\install_mysql_in_linux.txt   
+   ```
+   ### HIVE安装配置
+   ```
+    I.Hive下载方式：    
+        1.官网下载：http://hive.apache.org/downloads.html
+            建议下载2.X最后稳定版：https://mirror.bit.edu.cn/apache/hive/hive-2.3.7/apache-hive-2.3.7-bin.tar.gz
+        2.老师云盘下载（推荐）
+    II.根据文档operator\mysql\1.install_mysql_in_linux.txt完成MYSQL安装；
+    III.根据文档：operator\hive_operator\2.Inithive(initSchema).txt完成Hive安装和配置；
+    IV.Hive使用及功能测试：
+   ```
+   ### 自然语言处理HANLP
+   ```
+    GitHub网址：https://github.com/hankcs/HanLP/tree/1.x
+    
    ```

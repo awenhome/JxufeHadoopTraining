@@ -18,6 +18,7 @@
     <maven.compiler.target>1.7</maven.compiler.target>
     <!-- 这里对jar包版本做集中管理 -->
     <hadoop.version>2.7.7</hadoop.version>
+    <hive.version>2.3.7</hive.version>
     <junit.version>4.12</junit.version>
   </properties>
   <dependencies>
@@ -40,6 +41,26 @@
       <artifactId>hadoop-hdfs</artifactId>
       <version>${hadoop.version}</version>
     </dependency>
+    <!-- HIVE的相关依赖 -->
+    <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-jdbc</artifactId>
+      <version>${hive.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-exec</artifactId>
+      <version>${hive.version}</version>
+    </dependency>
+
+    <!--自然语言处理——Hanlp -->
+    <dependency>
+      <groupId>com.hankcs</groupId>
+      <artifactId>hanlp</artifactId>
+      <version>portable-1.7.8</version>
+    </dependency>
+
     <!-- 单元测试的依赖 -->
     <dependency>
       <groupId>junit</groupId>

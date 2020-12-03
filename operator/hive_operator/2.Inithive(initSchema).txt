@@ -1,0 +1,62 @@
+安装完mysql后按照本文档完成Hive环境安装和配置：
+1.mysql：创建作为hive元数据保存的数据库
+    create database hivemeta2020 character set utf8;
+
+2.对作为hive元数据保存的数据库授权，授权hive配置的mysql用户(例如用户名为sql_jxufe),具有操作权限
+ grant all on hivemeta2020.* to 'sql_jxufe'@'%' identified by '123456';  //hive2020.*数据库下所有表授权；'sql_jxufe'@'%'：对用户sql_jxufe授权，%表示允许任意远程机器用该用户远程访问
+ flush privileges;
+
+3.(1)下载Hive并解压缩；
+  (2)配置环境变量：在~/.bashrc中将$HIVE_HOME/bin放到path中；
+  (3)配置hive-site.xml文件(修改operator\configfiles\hive\hive-site.xml文件后，上传到Linux的$HIVE_HOME/conf目录下即可)；
+  (4)将mysql-connector-java-5.x.xx-bin.jar添加到hive的lib中。
+
+4.初始化元数据信息：
+    schematool -initSchema -dbType mysql
+
+5.启动元数据服务：hive --service metastore &
+
+6.启动Hive client的步骤：
+  （1）.启动一个终端，执行：hive
+  （2）启动hive2 client步骤：
+    （a）.启动一个终端，执行：hiveserver2或者后台启动nohup hiveserver2 1>~/logs/hiveserver2.log 2>&1 &
+    （b）.启动一个新终端，执行：beeline，进入beeline后执行： !connect jdbc:hive2://hadoop01:10000/default   之后输入用户名（hive）和密码（hive）即可。
+    注意：如果beeline连接时候报错，需要在$HADOOP_HOME/etc/hadoop/core-site.xml中增加以下内容：
+     <!--解决beeline连接hive权限不足的问题,参考：https://blog.csdn.net/u011495642/article/details/84305944-->
+     <!--设置只允许jxufe用户登录-->
+     <property>
+             <name>hadoop.proxyuser.jxufe.hosts</name>
+             <value>*</value>
+     </property>
+     <property>
+             <name>hadoop.proxyuser.jxufe.groups</name>
+             <value>*</value>
+     </property>
+
+
+7.应用：创建各类Hive表进行功能测试
+    show databases;  //显示所有database
+    show tables;  //显示所有表
+    分区分桶表参考：operator\hive_operator\hive table with partitioned&bucket.txt
+    复制数据explode案例参考:operator\hive_operator\hive with array(explode).txt
+    自定义UDF函数使用参考：operator\hive_operator\hive udf test.txt
+
+8.关于HIVE集群理解：由于HIVE的元数据是保存在MYSQL中，而真实数据是保存在HDFS或HBase上。因此只要HDFS集群
+    中的设备，在配置HIVE中使用的元数据是一样的（即用的是同一个MYSQL中同一个数据库来作为元数据库),则这些机器
+    自动组成集群。任意一个终端上修改了元数据信息，对其他终端是同步影响的（以为都指向同一个MySQL元数据库)
+
+#以下Spark课程配置，Hadoop课程略过
+sparksql整合hive：
+1.Spark版本需要支持Hive：
+    spark官网下载的版本中，需要使用pre-build for apache hadoopx.x版本（1.4.0以后的版本）或者自己下载源码编译，
+    注意编译源码时需要支持Hive(-Phive -Phive-thriftserver)，官网链接:https://spark.apache.org/docs/latest/building-spark.html；
+    注意其中with user-provided apache hadoop版本中默认不支持hive的，运行spark-sql会报错。
+2.确保对$HIVE_HOME/conf下的hive-site.xml进行正确配置，如果修改了远数据库，注意要更新配置文件；
+3.在$HIVE_HOME/conf下的hive-site.xml中新增配置信息：
+            <property>
+                <name>hive.metastore.uris</name>hive元数据uri列表
+                <value>thrift://hadoop01:9083</value>
+            </property>
+4.选择一个安装了Hive环境的机器，启动hive元数据的thrift服务，执行：hive --service metastore
+5.将$HIVE_HOME/conf下的hive-site.xml拷贝到集群所有机器的$SPARK_HOME/conf下：spark-sql支持hive；
+6.IDEA中将$HIVE_HOME/conf下的hive-site.xml拷贝到项目根目录下的./main/resources下：SparkSession（enableHiveSupport）可以直接查询hive中的表；

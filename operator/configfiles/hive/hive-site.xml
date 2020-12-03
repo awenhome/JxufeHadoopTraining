@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?><!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+--><configuration>
+  <!-- WARNING!!! This file is auto generated for documentation purposes ONLY! -->
+  <!-- WARNING!!! Any changes you make to this file will be ignored by Hive.   -->
+  <!-- WARNING!!! You must make your changes in hive-site.xml instead.         -->
+  <!-- Hive Execution Parameters -->
+
+        <!-- 插入一下代码 -->
+    <property>
+        <name>javax.jdo.option.ConnectionUserName</name>MySQL数据库用户名
+        <value>sql_jxufe</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionPassword</name>MySQL数据库用户名对应的密码
+        <value>123456</value>
+    </property>
+   <property>
+        <name>javax.jdo.option.ConnectionURL</name>mysql
+        <value>jdbc:mysql://hadoop01:3306/hivemeta2020</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionDriverName</name>mysql驱动程序
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+        <!-- 到此结束代码 -->
+	<!--spark整合hive:配置元数据数据库所在机器-->
+    <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://hadoop01:9083</value>
+    </property>
+
+    <!-- 解决spark hive插入数据异常Spark currently does NOT populate bucketed output:http://bcxw.net/article/202.html-->
+    <property>
+        <name>hive.enforce.bucketing</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>hive.enforce.sorting</name>
+        <value>false</value>
+    </property>
+
+
+  <property>
+    <name>hive.exec.script.wrapper</name>
+    <value/>
+    <description/>
+  </property>
+</configuration>

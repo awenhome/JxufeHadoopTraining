@@ -1,0 +1,18 @@
+drop table student_address;
+create table student_address(id string,age int,name string,address array<String>)
+partitioned by (city string)
+row format delimited fields terminated by ' '
+collection items terminated by ',' stored as textfile;
+
+
+//describe:查看表信息
+desc formatted student_part;
+
+//将本地数据导入到分区表student_part中
+LOAD DATA LOCAL INPATH './localdata/hivedata/student_buckets_address.txt' OVERWRITE INTO TABLE student_address PARTITION (city='jx');
+
+//将复杂数据explode后，按对应行信息显示
+参考官方写法：
+    官网案例：select t.name,tf.* from (select * from student_address) t lateral view explode(array('A','B','C')) tf;
+使用到本例写法：
+    本案例：select stu.name,add.info from student_address stu lateral view explode(stu.address) add as info;

@@ -1,0 +1,59 @@
+Hbase建测试表：
+create 'users2','address','info' 
+
+Hbase中插入测试数据：
+put 'users2', 'xiaoming', 'info:age', '24'
+put 'users2', 'xiaoming', 'info:birthday', '1987-06-17'
+put 'users2', 'xiaoming', 'info:company', 'alibaba'
+put 'users2', 'xiaoming', 'address:contry', 'china'
+put 'users2', 'xiaoming', 'address:province', 'zhejiang'
+put 'users2', 'xiaoming', 'address:city', 'hangzhou'
+put 'users2', 'zhangyifei', 'info:favorite', 'movie'
+put 'users2', 'zhangyifei', 'info:birthday', '1987-06-17'
+put 'users2', 'zhangyifei', 'info:company', 'alibaba'
+put 'users2', 'zhangyifei', 'address:contry', 'china'
+put 'users2', 'zhangyifei', 'address:province', 'guangdong'
+put 'users2', 'zhangyifei', 'address:city', 'jieyang'
+put 'users2', 'zhangyifei', 'address:town', 'xianqiao'
+
+
+
+hive客戶端設置：
+set hbase.zookeeper.quorum=master.hadoop:2181,slave1.hadoop:2181;
+set zookeeper.znode.parent=/hbase;
+add jar /usr/hive/hive-2.1.1/lib/hive-hbase-handler-2.1.1.jar;
+
+list jars;   //可以看到刚刚添加的jar
+
+//创建hive表映射到Hbase表:所有列簇
+create external table userstest(rowkey string,address map<string,string>,info map<string,string>)
+row format delimited fields terminated by '\t'
+stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+with serdeproperties("hbase.columns.mapping"=":key,address:,info:")
+tblproperties("hbase.table.name"="users2");
+
+
+
+//创建hive表映射到Hbase表:部分列簇部分列
+create external table userspart(rowkey string,city string,company string)
+row format delimited fields terminated by '\t'
+stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+with serdeproperties("hbase.columns.mapping"=":key,address:city,info:company")
+tblproperties("hbase.table.name"="users2");
+
+
+//Hbase作业中Hive跟Hbase整合例子：
+create external table temputertable3(rowkey string,temp double,humi string,lati string,lon string,pres string)
+row format delimited fields terminated by '\t'
+stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+with serdeproperties("hbase.columns.mapping"=":key,info:temp,info:humi,info:lati,info:lon,info:pres")
+tblproperties("hbase.table.name"="temputertable");
+
+
+
+
+create external table temputertable10(rowkey string,temp double,humi string,lati string,lon string,pres string)
+row format delimited fields terminated by '\t'
+stored by 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+with serdeproperties("hbase.columns.mapping"=":key,info:temp,info:humi,info:lati,info:lon,info:pres")
+tblproperties("hbase.table.name"="temputertable2");

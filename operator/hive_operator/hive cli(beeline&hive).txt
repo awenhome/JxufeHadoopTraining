@@ -1,0 +1,6 @@
+启动Hive client的步骤：
+1.启动一个终端，执行：hive
+启动hive2 client步骤：
+1.启动一个终端，执行：hiveserver2或者后台启动nohup hiveserver2 1>~/logs/hiveserver2.log 2>&1 &
+2.启动一个新终端，执行：beeline，进入beeline后执行： !connect jdbc:hive2://hadoop01:10000/default   之后输入用户名（hive）和密码（hive）即可。
+

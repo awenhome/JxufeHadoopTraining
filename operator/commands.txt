@@ -1,0 +1,46 @@
+查看占用端口的程序：ss -lntpd | grep 3306
+查看java进程运行情况：jps
+启动hadoop集群：start-all.sh(或者start-dfs.sh   start-yarn.sh)
+启动Hive client的步骤：
+  1.启动一个终端，执行：hive
+  启动hive2 client步骤：
+      1.启动一个终端，执行：hiveserver2或者后台启动nohup hiveserver2 1>~/logs/hiveserver2.log 2>&1 &
+      2.启动一个新终端，执行：beeline，进入beeline后执行： !connect jdbc:hive2://master.hadoop:10000/default   之后输入用户名（hive）和密码（hive）即可。 
+启动Zookeeper集群：
+  启动（所有机器上执行）：zkServer.sh start
+  查看状态：zkServer.sh status
+  停止（所有机器上执行）: zkServer.sh stop
+启动Hbase集群：start-hbase.sh
+启动spark集群：start-all-spark.sh(或者start-master.sh  start-slaves.sh)
+启动Hive元数据服务(spark-sql集成Hive表时需要用)：hive --service metastore  &
+启动kafka程序单机版本（参考官网：http://kafka.apache.org/documentation/#quickstart）：
+    1.下载、解压缩、Linux打开终端并切换到目录下
+        cd /home/jxufe/software/kafka/kafka_2.12-2.5.0
+    2.启动Zookeeper服务（单机版）：
+        bin/zookeeper-server-start.sh config/zookeeper.properties &
+        或者 bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
+    3.启动Kafka服务：bin/kafka-server-start.sh config/server.properties &
+        或者 bin/kafka-server-start.sh -daemon config/server.properties
+    4.创建Topic（如创建一个topic名称为topic1指令如下）：
+      （1）创建topic命令：bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic topic1
+      （2）显示topic命令：bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+      （3）删除topic命令：bin/kafka-topics.sh  --delete --bootstrap-server localhost:9092  --topic topic1
+    5.启动kafka消息发送端：
+    >bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic topic1
+     This is a message
+     This is another message
+    6.启动Kafka接收端（消费者）：
+    > bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic1 --from-beginning
+    This is a message
+    This is another message
+启动kafka集群：
+    1.启动zookeeper集群（参考前面“启动Zookeeper集群”）
+    2.启动kafka：
+      (1)首先都要切换到安装目录：cd $KAFKA_HOME
+      (2)集群结点上分别执行：
+       master>:bin/kafka-server-start.sh config/server-1.properties &
+       slave1>:bin/kafka-server-start.sh config/server-2.properties &
+       slave2>:bin/kafka-server-start.sh config/server-3.properties &
+   3.创建Topic(参考单击版本用法)
+   4.启动kafka消息发送端(参考单击版本用法)
+   5.启动Kafka接收端（消费者）:或者用spark程序接受发送端发送的数据(参考单击版本用法)
