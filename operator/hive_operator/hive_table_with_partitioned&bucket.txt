@@ -1,3 +1,9 @@
+//创建普通表
+create table student(id string,age int,name string)
+row format delimited fields terminated by ',' stored as textfile;
+LOAD DATA LOCAL INPATH '/home/jxufe/localdata/hivedata/student_buckets.txt' OVERWRITE INTO TABLE student;
+
+
 //创建分区表
 create table student_part(id string,age int,name string)
 partitioned by (city string)
@@ -8,8 +14,9 @@ row format delimited fields terminated by ',' stored as textfile;
 desc formatted student_part;
 
 //将本地数据导入到分区表student_part中
-LOAD DATA LOCAL INPATH './localdata/hivedata/student_buckets.txt' OVERWRITE INTO TABLE student_part PARTITION (city='jx');
-
+相对路径：LOAD DATA LOCAL INPATH './localdata/hivedata/student_buckets.txt' OVERWRITE INTO TABLE student_part PARTITION (city='jx');
+绝对路径：LOAD DATA LOCAL INPATH '/home/jxufe/localdata/hivedata/student_buckets.txt' OVERWRITE INTO TABLE student_part PARTITION (city='jx');
+换分区导入：LOAD DATA LOCAL INPATH './localdata/hivedata/student_buckets.txt' OVERWRITE INTO TABLE student_part PARTITION (city='bj');
 
 //描述:查看表的信息
 select * from student_part where city='jx';

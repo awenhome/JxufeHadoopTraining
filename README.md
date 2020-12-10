@@ -173,6 +173,71 @@
     III.根据文档：operator\hive_operator\2.Inithive(initSchema).txt完成Hive安装和配置；
     IV.Hive使用及功能测试：
    ```
+   ### HIVE HQL相关语法
+   ```
+    创建数据库表语法规则：
+        CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name 
+          [(col_name data_type [COMMENT col_comment], ...)] 
+          [COMMENT table_comment] 
+          [PARTITIONED BY (col_name data_type [COMMENT col_comment], ...)] 
+          [CLUSTERED BY (col_name, col_name, ...) 
+          [SORTED BY (col_name [ASC|DESC], ...)] INTO num_buckets BUCKETS] 
+          [ROW FORMAT row_format] 
+          [STORED AS file_format] 
+          [LOCATION hdfs_path]
+    创建数据库表语法说明：
+        CREATE TABLE 创建一个指定名字的表。如果相同名字的表已经存在，则抛出异常；用户可以用 IF NOT EXIST 选项来忽略这个异常。
+        EXTERNAL 关键字可以让用户创建一个外部表，在建表的同时指定一个指向实际数据的路径（LOCATION），
+        有分区的表可以在创建的时候使用 PARTITIONED BY 语句。一个表可以拥有一个或者多个分区，每一个分区单独存在一个目录下。
+        表和分区都可以对某个列进行 CLUSTERED BY 操作，将若干个列放入一个桶（bucket）中。
+        可以利用SORT BY 对数据进行排序。这样可以为特定应用提高性能。
+        默认的字段分隔符为ascii码的控制符\001(^A)
+                tab分隔符为 \t。只支持单个字符的分隔符。
+        如果文件数据是纯文本，可以使用 STORED AS  
+                TEXTFILE。如果数据需要压缩，使用 STORED 
+                AS SEQUENCE 。
+    
+    加载数据语法：
+        LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
+    加载数据语法说明：
+        1.Load 操作只是单纯的复制/移动操作，将数据文件移动到 Hive 表对应的位置。如果表中存在分区，则必须指定分区名。
+        2.加载本地数据，指定LOCAL关键字，即本地，可以同时给定分区信息 。
+            2.1load 命令会去查找本地文件系统中的 filepath。如果发现是相对路径，则路径会被解释为相对于当前用户的当前路径。用户也可以为本地文件指定一个完整的 URI，比如：file:///user/hive/project/data1.
+            2.2例如：加载本地数据，同时给定分区信息：
+                hive> LOAD DATA LOCAL INPATH 'file:///examples/files/kv2.txt' OVERWRITE INTO TABLE invites PARTITION (ds='2008-08-15');
+        3.加载DFS数据 ，同时给定分区信息：
+            3.1 如果 filepath 可以是相对路径 URI路径，对于相对路径，Hive 会使用在 hadoop 配置文件中定义的 fs.defaultFS  指定的Namenode 的 URI来自动拼接完整路径。
+            3.2 例如：加载数据到hdfs中，同时给定分区信息
+              hive> LOAD DATA INPATH '/user/myname/kv2.txt' OVERWRITE INTO TABLE invites            
+               PARTITION (ds='2008-08-15');
+        4.OVERWRITE
+            4.1指定 OVERWRITE ,目标表（或者分区）中的内容（如果有）会被删除，然后再将 filepath 指向的文件/目录中的内容添加到表/分区中。如果目标表（分区）已经有一个文件，并且文件名和 filepath 中的文件名冲突，那么现有的文件会被新文件所替代。
+    分区分桶测试参考文件：operator\hive_operator\hive_table_with_partitioned&bucket.txt
+   ```
+   ### HIVE 实现wordcount案例
+   ```
+        创建表：
+        create table wordcount(line string) row format delimited fields terminated by ' ' lines terminated by '
+        导入数据（不加local即默认从hdfs上导入文件,且默认是剪切过去而不是拷贝)：
+        load data inpath '/wc_in/word.txt' into table wordcount;
+        查询：
+        select a.word word,count(*) count from (select explode(split(line,' ')) as word from wordcount) a group by a.word order by count desc limit 6;
+   ```
+   ### HIVE自定义函数
+   ```
+    1.自定义函数分类：
+        UDF(User-Defined-Function)用户自定义函数，输入一个数据然后产生一个数据（自带的如concat等）；
+        UDAF(User-Defined Aggregation Function)用户自定义聚合函数，多个输入数据然后产生一个输出参数(自带的如max、min、avg等)；
+        UDTF(User-Defined Table-generating Function)用户自定义表生成函数，输入一行数据生成N行数据(自带的如explode等)
+    2.自定义UDF函数流程：参考operator\hive_operator\hive_udf_test.txt
+        要想在Hive中完成自定义UDF函数的操作，要按照如下的流程进行操作：
+        1、自定义Java类并继承org.apache.hadoop.hive.ql.exec.UDF；
+        2、写evaluate函数[注意：evaluate()函数在父类UDF中是没有的]，evaluate函数支持重载；
+        3、把程序打包放到hive所在服务器；
+        4、进入hive客户端，添加jar包；
+        5、创建关联到Java类的Hive函数；
+        6、Hive命令行中执行查询语句：select 方法名(属性) from 表名——得出自定义函数输出的结果。
+   ```
    ### 自然语言处理HANLP
    ```
     GitHub网址：https://github.com/hankcs/HanLP/tree/1.x

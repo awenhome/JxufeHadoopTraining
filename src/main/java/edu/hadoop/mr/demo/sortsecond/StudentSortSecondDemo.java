@@ -111,7 +111,8 @@ public class StudentSortSecondDemo {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        String inputPath = "/inputdata/students.txt",outputPath="/output/StuSortSecDemo";
+        String inputPath = "/inputdata/students.txt";
+        String outputPath="/output/StuSortSecDemo";
         if(args.length>=2) {
             inputPath =  args[0];
             outputPath=args[1];

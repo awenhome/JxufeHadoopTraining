@@ -96,10 +96,14 @@ export PATH=$PATH:$MYSQL_HOME/bin
 
 14.测试创建数据库：
     create database sparkdb character set utf8;
+    create database hivemeta2020 character set utf8;
 
 15.给用户授权grant：
-    （1）授权root用户可以从任意机器远程，root用户有对所有数据库所有表的操作权限：
+    （1）授权root用户可以从任意机器远程，rootcreate database sparkdb character set utf8;用户有对所有数据库所有表的操作权限：
     grant all privileges on *.* to 'root'@'%' identified by 'root用户密码' with grant option;
+    flush privileges;
+
+    grant all privileges on hivemeta2020.* to 'sql_jxufe'@'%' identified by 'root用户密码' with grant option;
     flush privileges;
 
     (2)创建新mysql数据库用户：sql_jxufe,设置可以从任意机器远程访问数据库sparkdb下所有表：

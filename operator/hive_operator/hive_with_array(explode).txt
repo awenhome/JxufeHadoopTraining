@@ -15,4 +15,7 @@ LOAD DATA LOCAL INPATH './localdata/hivedata/student_buckets_address.txt' OVERWR
 参考官方写法：
     官网案例：select t.name,tf.* from (select * from student_address) t lateral view explode(array('A','B','C')) tf;
 使用到本例写法：
-    本案例：select stu.name,add.info from student_address stu lateral view explode(stu.address) add as info;
+    如果只展开和查看address这一列：select explode(stu.address) from student_address as stu;
+    如果要跟其他列一起展开的效果，本案例参考官网案例写法如下：
+        select stu.name,addlist.* from student_address stu lateral view explode(stu.address) addlist;
+        或：select stu.name,add.info from student_address stu lateral view explode(stu.address) add as info;

@@ -7,6 +7,9 @@
  flush privileges;
 
 3.(1)下载Hive并解压缩；
+    >cd ~/software/hive
+        >tar xvf apache-hive-2.3.7-bin.tar.gz
+        >mv apache-hive-2.3.7-bin hive-2.3.7
   (2)配置环境变量：在~/.bashrc中将$HIVE_HOME/bin放到path中；
   (3)配置hive-site.xml文件(修改operator\configfiles\hive\hive-site.xml文件后，上传到Linux的$HIVE_HOME/conf目录下即可)；
   (4)将mysql-connector-java-5.x.xx-bin.jar添加到hive的lib中。
@@ -22,6 +25,7 @@
     （a）.启动一个终端，执行：hiveserver2或者后台启动nohup hiveserver2 1>~/logs/hiveserver2.log 2>&1 &
     （b）.启动一个新终端，执行：beeline，进入beeline后执行： !connect jdbc:hive2://hadoop01:10000/default   之后输入用户名（hive）和密码（hive）即可。
     注意：如果beeline连接时候报错，需要在$HADOOP_HOME/etc/hadoop/core-site.xml中增加以下内容：
+  再$HADOOP_HOME/etc/hadoop/core-site.xml文件中新增：
      <!--解决beeline连接hive权限不足的问题,参考：https://blog.csdn.net/u011495642/article/details/84305944-->
      <!--设置只允许jxufe用户登录-->
      <property>

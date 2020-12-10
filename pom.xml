@@ -54,18 +54,18 @@
       <version>${hive.version}</version>
     </dependency>
 
-    <!--自然语言处理——Hanlp -->
-    <dependency>
-      <groupId>com.hankcs</groupId>
-      <artifactId>hanlp</artifactId>
-      <version>portable-1.7.8</version>
-    </dependency>
-
     <!-- 单元测试的依赖 -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
+    </dependency>
+
+    <!--自然语言处理——Hanlp -->
+    <dependency>
+      <groupId>com.hankcs</groupId>
+      <artifactId>hanlp</artifactId>
+      <version>portable-1.7.8</version>
     </dependency>
   </dependencies>
 

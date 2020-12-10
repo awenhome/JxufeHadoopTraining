@@ -70,14 +70,17 @@ public class Student implements WritableComparable<Student> {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "stuId=" + stuId +
-                ", stuName='" + stuName + '\'' +
-                ", age=" + age +
-                ", gender=" + gender +
-                ", departmentId=" + departmentId +
-                '}';
+//        return "Student{" +
+//                "stuId=" + stuId +
+//                ", stuName='" + stuName + '\'' +
+//                ", age=" + age +
+//                ", gender=" + gender +
+//                ", departmentId=" + departmentId +
+//                '}';
+        return "学生姓名='" + stuName + '\'' +
+                ", 年龄=" + age;
     }
+
 
 
 
@@ -113,13 +116,6 @@ public class Student implements WritableComparable<Student> {
             return 1;
         }else{//age相等
             return -this.getStuName().compareTo(other.getStuName());
-//            if(this.getStuName().compareTo(other.getStuName())>0){
-//                return 1;
-//            }else if(this.getStuName().compareTo(other.getStuName())<0){
-//                return -1;
-//            }else{//age相等
-//                return 0;
-//            }
         }
     }
 }
