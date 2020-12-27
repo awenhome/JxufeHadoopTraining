@@ -1,0 +1,132 @@
+<ul class="dropdown-menu" aria-labelledby="drop2" style="display: none;">
+                                    <li>
+                                        <a onclick="window.location.href='http://dj.xh.sh.cn/';return false" target="_blank">徐汇党建网</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='http://rd.xh.sh.cn/';return false" target="_blank">徐汇人大网</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='http://zx.xh.sh.cn/';return false" target="_blank">徐汇政协网</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='http://www.shxuhui.jcy.gov.cn/';return false" target="_blank">徐汇检察</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='http://sh.wenming.cn/xhwmw/';return false" target="_blank">徐汇文明网</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/daj/';return false" target="_blank">徐汇档案</a>
+                                    </li>
+                                </ul>
+<ul class="dropdown-menu" aria-labelledby="drop2" style="display: none;">
+                                    <li>
+                                        <a onclick="window.location.href='/fagaiwei/';return false" target="_blank">发展和改革委员会</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jingwei/';return false" target="_blank">商务委员会</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiaoyuju/';return false" target="_blank">教育局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/kewei/';return false" target="_blank">科学技术委员会</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='https://gaj.sh.gov.cn/xhga/index.html';return false" target="_blank">徐汇区公安分局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/minzhengju/';return false" target="_blank">民政局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/sifaju/';return false" target="_blank">司法局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/caizhengju/';return false" target="_blank">财政局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/laobaoju/';return false" target="_blank">人力资源和社会保障局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/guihuaju/';return false" target="_blank">规划和自然资源局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/huanbaoju/';return false" target="_blank">生态环境局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jianjiaowei/';return false" target="_blank">建设和管理委员会</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/wenhuaju/';return false" target="_blank">文化和旅游局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/weishengju/';return false" target="_blank">卫生健康委员会</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/shengchanjianduju/';return false" target="_blank">应急管理局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/shenjiju/';return false" target="_blank">审计局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/guoziwei/';return false" target="_blank">国有资产监督管理委员会</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/gongshangfenju/';return false" target="_blank">徐汇区市场监督管理局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/tiyuju/';return false" target="_blank">体育局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/shirongju/';return false" target="_blank">绿化和市容管理局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/fangtuju/';return false" target="_blank">住房保障和房屋管理局</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/minfangban/';return false" target="_blank">民防办公室</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/tongjiju/';return false" target="_blank">统计局</a>
+                                    </li>
+                                </ul>
+<ul class="dropdown-menu" aria-labelledby="drop2" style="display: block;">
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_xjh/';return false" target="_blank">徐家汇街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_tp/';return false" target="_blank">天平街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_hn/';return false" target="_blank">湖南街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_fl/';return false" target="_blank">枫林街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_xt/';return false" target="_blank">斜土街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_tl/';return false" target="_blank">田林街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_cq/';return false" target="_blank">长桥街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_hm/';return false" target="_blank">虹梅街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_kj/';return false" target="_blank">康健街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_ly/';return false" target="_blank">凌云街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_lh/';return false" target="_blank">龙华街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_chj/';return false" target="_blank">漕河泾街道</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="window.location.href='/jiedao_hjz/';return false" target="_blank">华泾镇</a>
+                                    </li>
+                                </ul>

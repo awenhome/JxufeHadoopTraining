@@ -17,4 +17,11 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    @Test
+    public void splitString(){
+        String str = "1::Toy Story (1995)::Animation|Children's|Comedy";
+        String[] splits = str.split("::");
+        System.out.println(splits[0]+"  "+splits[1]+"   "+splits[2]);
+    }
 }

@@ -2,7 +2,6 @@
 1.eclipse|idea导出jar包；
 2.进入hive控制台：hive   
 3.在hive控制台：add jar /home/hadoop/jar/myudf.jar;  //加到hive工程classpath
-            show jars;
 4.临时加入到hive函数库：
 create temporary function diyudf as 'hive.udaf.MyUDF';
 

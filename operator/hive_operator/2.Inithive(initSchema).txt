@@ -8,8 +8,8 @@
 
 3.(1)下载Hive并解压缩；
     >cd ~/software/hive
-        >tar xvf apache-hive-2.3.7-bin.tar.gz
-        >mv apache-hive-2.3.7-bin hive-2.3.7
+    >tar xvf apache-hive-2.3.7-bin.tar.gz
+    >mv apache-hive-2.3.7-bin hive-2.3.7
   (2)配置环境变量：在~/.bashrc中将$HIVE_HOME/bin放到path中；
   (3)配置hive-site.xml文件(修改operator\configfiles\hive\hive-site.xml文件后，上传到Linux的$HIVE_HOME/conf目录下即可)；
   (4)将mysql-connector-java-5.x.xx-bin.jar添加到hive的lib中。
@@ -41,9 +41,9 @@
 7.应用：创建各类Hive表进行功能测试
     show databases;  //显示所有database
     show tables;  //显示所有表
-    分区分桶表参考：operator\hive_operator\hive table with partitioned&bucket.txt
-    复制数据explode案例参考:operator\hive_operator\hive with array(explode).txt
-    自定义UDF函数使用参考：operator\hive_operator\hive udf test.txt
+    分区分桶表参考：operator\hive_operator\hive_table_with_partitioned&bucket.txt
+    复制数据explode案例参考:operator\hive_operator\hive_with_array(explode).txt
+    自定义UDF函数使用参考：operator\hive_operator\hive_udf_test.txt
 
 8.关于HIVE集群理解：由于HIVE的元数据是保存在MYSQL中，而真实数据是保存在HDFS或HBase上。因此只要HDFS集群
     中的设备，在配置HIVE中使用的元数据是一样的（即用的是同一个MYSQL中同一个数据库来作为元数据库),则这些机器

@@ -1,6 +1,7 @@
 package edu.hadoop.hive.udaf;
 import org.apache.hadoop.hive.ql.exec.UDF;
 public final class AddUDF extends UDF {
+
    public Integer evaluate(Integer a, Integer b) {
      if (null == a || null == b) {
         return null;

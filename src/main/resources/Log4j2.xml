@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">   <!-- "WARN"||"DEBUG"||"INFO" -->
+    <Appenders>
+        <!-- 配置日志输出文件名字 追加读写 -->
+        <File name="LogFile" fileName="Logs//logdata.txt" append="true">
+            <PatternLayout pattern="%m%n" />
+        </File>
+        <!-- 输出到控制台的配置 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- 输出格式 charset="GBK" or "UTF-8" -->
+            <PatternLayout charset="UTF-8" pattern="%m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!-- 记录器输出文件为debug级别 -->
+        <!-- 根 控制台输出级别 -->
+        <Root level="INFO">
+            <AppenderRef ref="LogFile" />
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

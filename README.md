@@ -192,7 +192,8 @@
         表和分区都可以对某个列进行 CLUSTERED BY 操作，将若干个列放入一个桶（bucket）中。
         可以利用SORT BY 对数据进行排序。这样可以为特定应用提高性能。
         默认的字段分隔符为ascii码的控制符\001(^A)
-                tab分隔符为 \t。只支持单个字符的分隔符。
+                tab分隔符为 \t。
+        注意：Hive默认只支持单个字符的分隔符。https://blog.csdn.net/fighting_one_piece/article/details/37610085
         如果文件数据是纯文本，可以使用 STORED AS  
                 TEXTFILE。如果数据需要压缩，使用 STORED 
                 AS SEQUENCE 。
@@ -216,8 +217,8 @@
    ```
    ### HIVE 实现wordcount案例
    ```
-        创建表：
-        create table wordcount(line string) row format delimited fields terminated by ' ' lines terminated by '
+        创建表：drop table wordcount;
+        create table wordcount(line string);   //默认是空格切分列，换行切分行
         导入数据（不加local即默认从hdfs上导入文件,且默认是剪切过去而不是拷贝)：
         load data inpath '/wc_in/word.txt' into table wordcount;
         查询：
@@ -227,7 +228,7 @@
    ```
     1.自定义函数分类：
         UDF(User-Defined-Function)用户自定义函数，输入一个数据然后产生一个数据（自带的如concat等）；
-        UDAF(User-Defined Aggregation Function)用户自定义聚合函数，多个输入数据然后产生一个输出参数(自带的如max、min、avg等)；
+        UDAF(User-Defined Aggregation Function)用户自定义聚合函数，多个输入数据然后产生一个输出参数(自带的如max、min、avg、count等)；
         UDTF(User-Defined Table-generating Function)用户自定义表生成函数，输入一行数据生成N行数据(自带的如explode等)
     2.自定义UDF函数流程：参考operator\hive_operator\hive_udf_test.txt
         要想在Hive中完成自定义UDF函数的操作，要按照如下的流程进行操作：
